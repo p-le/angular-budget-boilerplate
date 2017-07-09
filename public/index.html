@@ -13,7 +13,10 @@
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <div ng-controller="TestController" ng-bind="hello"></div>
+    <h1>Test Base Controller</h1>
+    <div ng-controller="ChildController">
+      <button ng-click="log()">Test</button>
+    </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
   </body>
