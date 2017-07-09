@@ -1,0 +1,39 @@
+{
+  "name": "angular-pro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "phu.le.dev@gmal.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/grunt",
+    "test": "./node_modules/.bin/karma start"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.5",
+    "grunt": "^1.0.1",
+    "grunt-angular-templates": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express": "^1.4.1",
+    "grunt-ng-annotate": "^3.0.0",
+    "grunt-parallel": "^0.5.1",
+    "grunt-sass": "^2.0.0",
+    "jasmine-core": "^2.6.4",
+    "jshint": "^2.9.5",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-spec-reporter": "^0.0.31"
+  },
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-animate": "^1.6.5",
+    "angular-ui-router": "^1.0.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.1"
+  }
+}
