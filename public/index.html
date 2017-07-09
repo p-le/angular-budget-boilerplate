@@ -6,14 +6,71 @@
     <title>Angular Pro</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <link rel="stylesheet" href="style.css" />
-
   </head>
   <body>
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <div ng-controller="TestController" ng-bind="hello"></div>
+    <div class="main ui container" ng-controller="TestController">
+      <div class="ui three item menu">
+        <a class="active item">Editorials</a>
+        <a class="item">Reviews</a>
+        <a class="item">Upcoming Events</a>
+      </div>
+      <div class="ui grid">
+        <div class="row">
+          <div class="four wide column">
+            <pre>{{ data | json : 1 }}</pre>
+          </div>
+          <div class="eight wide column">
+            <div class="field" ng-repeat="item in data">
+              <label>{{ $id }}</label>
+              <input type="text" ng-model="item.type" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="four wide column">
+            <span>{{ $id }}</span>
+            <form class="ui form" name="carForm">
+              <div class="field">
+                <label>Plate</label>
+                <input type="text" ng-model="car.plate" name="plate" placeholder="What's the plate?" ng-maxlength="10" ng-required="true" ng-minlength="6" />
+              </div>
+              <button type="submit" ng-disabled="carForm.$invalid" class="ui primary button">Submit</button>
+            </form>
+          </div>
+          <div class="five wide column">
+            <div class="ui segment" ng-show="loading">
+              <div class="ui active dimmer">
+                <div class="ui text loader">Loading</div>
+              </div>
+              <p></p>
+            </div>
+            <pre class="ui label">{{ car | json : 1 }}</pre>
+            <div class="ui message" ng-show="carForm.plate.$dirty && carForm.plate.$invalid">
+              <div class="header">Some thing went wrong!</div>
+              <ul class="list">
+                <li ng-show="carForm.plate.$error.required">
+                  You must inform the plate of the car
+                </li>
+                <li ng-show="carForm.plate.$error.minlength">
+                  The plate must have at least 6 characters
+                </li>
+                <li ng-show="carForm.plate.$error.maxlength">
+                  The plate must have at most 10 characters
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="three wide column">
+            <pre class="ui label">{{ carForm | json : 1 }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
   </body>
