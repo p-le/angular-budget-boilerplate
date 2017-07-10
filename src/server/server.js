@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const visionClient = require('./libs/visionClient');
 
 const app = express();
 
