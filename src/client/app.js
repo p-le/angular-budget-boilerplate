@@ -1,7 +1,10 @@
 (function() {
   angular.module('angularPro', [
     'ngAnimate',
-    'ui.router'
+    'ui.router',
+    'ngMessages',
+    'ngSanitize',
+    'ngMaterial'
   ])
   .controller('TestController', function($scope) {
     $scope.hello = 'Hello World';

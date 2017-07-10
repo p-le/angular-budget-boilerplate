@@ -1,2 +1,54 @@
-html {
+#drop-placheholder {
+  width: 300px;
+  height: 200px;
+  border: 1px dashed #00BCD4;
+  line-height: 200px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.preview {
+  width: 100%;
+  height: auto;
+}
+
+.flexbox-parent {
+  width: 85%;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+md-input-container {
+  margin: 25px 0;
+}
+
+.card-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+  margin: 0 10px;
+}
+
+.md-chip-content {
+  font-size: 12px;
+  
+}
+
+md-card-content {
+  display: inline;
+  
+  fieldset {
+    margin: 5px 0;
+    display: inline-block;
+  }
 }
