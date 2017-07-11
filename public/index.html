@@ -14,14 +14,25 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
     <div ng-controller="MainController">
-      <form name="mainForm">
-        <input name="firstname" ng-model="user1.firstname" />
-        <input name="lastname" ng-model="user1.lastname" />
-        <input name="firstname" ng-model="user2.firstname" />
-        <input name="lastname" ng-model="user2.lastname" />
+      <form name="passwordForm">
+        <input type="password" name="password" ng-model="user.password" />
+        <input type="password" name="confirmPassword" ng-model="confirmPassword" validate-equals="user.password" />
+        <input type="email" ng-model="user.email" ng-model-options="{ updateOn: 'blur', '*': '$inherit' }" unique-email />
       </form>
-      <button type="submit" size="large">Test</button>
-      <pagination></pagination>
+      <pagination 
+        num-pages="numPages" 
+        current-page="currentPage"
+        on-select-page="selectPage(page)"
+      >
+      </pagination>
+      <accordion>
+        <accordion-group heading="Heading 1">
+          Group 1 <strong>Body</strong>
+        </accordion-group>
+        <accordion-group heading="Heading 2">
+          Group 2 <strong>Body</strong>
+        </accordion-group>
+      </accordion>
     </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>

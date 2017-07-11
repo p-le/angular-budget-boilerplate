@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+const authenticate = require('./mocks/authenticate');
+
+
+app.use('/api', authenticate);
 
 app.use(cors())
   .use(bodyParser.json())

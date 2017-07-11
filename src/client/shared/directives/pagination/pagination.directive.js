@@ -9,7 +9,8 @@
       restrict: 'E',
       scope: {
         numPages: '=',
-        currentPage: '='
+        currentPage: '=',
+        onSelectPage: '&'
       },
       replace: true,
       templateUrl: 'templates/pagination.html',
@@ -17,25 +18,22 @@
         scope.isActive = isActive;
         scope.selectPage = selectPage;
         scope.selectNext = selectNext;
-        
-        scope.$watch('numPages', function(value) {
-          scope.pages = [];
-          for (var i=1; i <= value; i++) {
-            scope.pages.push(i);
-          }
-          if (scope.currentPage > value) {
-            scope.selectPage(value);
-          }
-        });
+        scope.pages = [];
+        for (var i=1; i <= scope.numPages; i++) {
+          scope.pages.push(i);
+        }
 
         function isActive(page) {
           return scope.currentPage === page;
         }
+
         function selectPage(page) {
           if (!scope.isActive(page)) {
             scope.currentPage = page;
+            scope.onSelectPage({ page: page });
           }
         }
+        
         function selectNext() {
           if (!scope.noNext()) {
             scope.selectPage(scope.currentPage + 1);

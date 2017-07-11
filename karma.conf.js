@@ -7,14 +7,19 @@ module.exports = (config) => {
       'node_modules/angular-mocks/angular-mocks.js', 
       'node_modules/angular-animate/angular-animate.js',
       'node_modules/angular-ui-router/release/angular-ui-router.js',
-      'src/client/**/*.html',
+      'public/templates/**/*.html',
       'src/client/**/*.spec.js',
       'src/client/**/*.js'
     ],
     exclude: [
     ],
     preprocessors: {
-      'src/client/**/*.js': ['coverage']
+      'src/client/**/*.js': ['coverage'],
+      'public/templates/**/*.html': ['ng-html2js']
+    },
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'public/templates/',
+      moduleName: 'angularPro.templates'
     },
     reporters: ['spec', 'coverage'],
     coverageReporter: {

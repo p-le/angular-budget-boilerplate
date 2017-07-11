@@ -5,14 +5,12 @@
     .controller('MainController', MainController);
 
   function MainController($scope) {
-    $scope.user1 = {
-      firstname: 'LE QUANG',
-      lastname: 'PHU'
-    };
+    $scope.user = {};
+    $scope.currentPage = 3;
+    $scope.numPages = 8;
 
-    $scope.user2 = {
-      firstname: 'PHU QUANG',
-      lastname: 'LE'
-    };
+    $scope.selectPage = function(page) {
+      console.log(page);
+    }
   }
 })();
