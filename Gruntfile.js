@@ -90,7 +90,7 @@ const sass = {
 const express = {
   livereload: {
     options: {
-        port: 9000,
+        port: 9001,
         bases: './public',
         monitor: {},
         debug: true,

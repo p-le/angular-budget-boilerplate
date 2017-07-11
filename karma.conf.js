@@ -4,6 +4,7 @@ module.exports = (config) => {
     frameworks: ['jasmine'],
     files: [
       'node_modules/angular/angular.js', 
+      'node_modules/angular-mocks/angular-mocks.js', 
       'node_modules/angular-animate/angular-animate.js',
       'node_modules/angular-ui-router/release/angular-ui-router.js',
       'src/client/**/*.html',

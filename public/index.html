@@ -13,7 +13,16 @@
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <div ng-controller="TestController" ng-bind="hello"></div>
+    <div ng-controller="MainController">
+      <form name="mainForm">
+        <input name="firstname" ng-model="user1.firstname" />
+        <input name="lastname" ng-model="user1.lastname" />
+        <input name="firstname" ng-model="user2.firstname" />
+        <input name="lastname" ng-model="user2.lastname" />
+      </form>
+      <button type="submit" size="large">Test</button>
+      <pagination></pagination>
+    </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
   </body>
