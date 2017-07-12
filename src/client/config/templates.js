@@ -26,6 +26,7 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "  <div class=\"controls\">\n" +
     "    <input />\n" +
     "  </div>\n" +
+    "  <span ng-repeat=\"error in $fieldErrors\">{{ error }}</span>\n" +
     "</div>"
   );
 

@@ -8,6 +8,7 @@
     var directive = {
       restrict: 'E',
       priority: 100,
+      replace: true,
       terminal: true,
       compile: compileFn
     };
@@ -33,7 +34,6 @@
             childScope.$fieldId = attrs.ngModel.replace('.', '_').toLowerCase() +  '_' + childScope.$id;
             childScope.$fieldLabel = labelContent;
 
-            console.log(childScope);
             angular.forEach(attrs.$attr, function(original, normalized) {
               var value = element.attr(original);
               inputElement.attr(original, value);
@@ -51,6 +51,7 @@
 
             childScope.$watch('$field.dirty && $field.$error', function(errorList) {
               childScope.$fieldErrors = [];
+              console.log(childScope.errorList);
               angular.forEach(errorList, function(invalid, key) {
                 if (invalid) {
                   childScope.$fieldErrors.push(key);
