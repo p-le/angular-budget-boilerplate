@@ -56,6 +56,10 @@ const watch = {
     files: 'src/client/**/*.scss',
     tasks: [ 'build-style' ]
   },
+  html: {
+    files: 'src/client/templates/*.html',
+    tasks: [ 'build' ]
+  },
   server: {
     files: [ 'src/server/**/*.js' ],
     tasks: ''
@@ -86,6 +90,18 @@ const sass = {
   }
 };
 
+const ngtemplates = {
+  app: {
+    options: {
+      base: "web",
+      module: "angularPro"
+    },
+    cwd: 'src/client',
+    src: "templates/*.html",
+    dest: "src/client/config/templates.js"
+  }
+};
+
 /* Start Express Server */
 const express = {
   livereload: {
@@ -107,12 +123,13 @@ module.exports = function(grunt) {
     concat,
     uglify,
     sass,
+    ngtemplates,
     express
   });
 
   plugins.forEach(p => grunt.loadNpmTasks(p));
 
   grunt.registerTask('default', [ 'express', 'build', 'build-style', 'concat:vendor', 'watch' ]);
-  grunt.registerTask('build', [ 'ngAnnotate', 'concat:js', 'uglify' ]);
+  grunt.registerTask('build', [ 'ngAnnotate', 'ngtemplates', 'concat:js', 'uglify' ]);
   grunt.registerTask('build-style', [ 'sass', 'concat:css' ]);
 };
