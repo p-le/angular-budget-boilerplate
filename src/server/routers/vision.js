@@ -1,20 +1,17 @@
 const express = require('express');
-const request = require('sync-request');
+const path = require('path');
+const fs = require('fs');
+const formidable = require('formidable');
 
 const visionClient = require('../libs/visionClient');
-const visionController = require('../controllers/vision.controller');
 const router = express.Router();
 
 router.post('/analyze', (req, res) => {
   const url = req.body.url;
   const types = req.body.types;
 
-  // const test = request('GET', url);
-  // console.log(test.headers.location);
-
   visionClient.detect(url, types)
     .then(data => {
-      visionController.save(data);
       res.json({
         url: url,
         result: data
@@ -24,6 +21,46 @@ router.post('/analyze', (req, res) => {
       console.log(error);
       res.json({ error: JSON.stringify(error)});
     });
+});
+
+router.post('/analyzeFile', (req, res) => {
+  const form = new formidable.IncomingForm();
+  let uploadFile;
+  let types;
+
+  form.parse(req);
+
+  form.on('fileBegin', function (name, file){
+    file.path = path.resolve(__dirname, '../../../public/images/' + file.name);
+  });
+
+  form.on('file', (name, file) => {
+    uploadFile = file;
+  });
+
+  form.on('field', (name, field) => {
+    types = field;
+  });
+
+  form.on('end', () => {
+    const url = `http://172.16.115.96:9000/images/${uploadFile.name}`;
+    const imageFile = fs.readFileSync(uploadFile.path);
+    const encoded = new Buffer(imageFile, 'base64');
+    types = types.split(',');
+
+    visionClient.detect(encoded, types)
+      .then(data => {
+        res.json({
+          url: url,
+          result: data
+        });
+      })
+      .catch(error => {
+        res.json({ error: JSON.stringify(error)});
+      });
+
+  });
+  
 });
 
 module.exports = router;

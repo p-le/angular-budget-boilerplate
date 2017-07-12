@@ -61,3 +61,6 @@ __build__
 __coverage__
 public/*.js
 public/*.css
+
+src/server/libs/*.json
+public/images/*

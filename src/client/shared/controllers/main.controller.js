@@ -5,12 +5,7 @@
     .controller('MainController', MainController);
 
   function MainController($scope, visionService) {
-    $scope.detections = [];
-    
     $scope.data = [];
-
-    $scope.selectedTypes = [ 'labels'];
-
     $scope.types = [
       'labels',
       'crops',
@@ -20,12 +15,23 @@
       'logos',
       'properties',
       'safeSearch',
-      'similar',
-      'text'
+      'text',
+      'similar'
     ];
-
+    $scope.selectedTypes = [
+      // 'labels',
+      // 'crops',
+      // 'document',
+      // 'faces',
+      // 'landmarks',
+      // 'logos',
+      // 'properties',
+      // 'safeSearch',
+      // 'text'
+    ];
     $scope.processing = false;
     $scope.image = {};
+    $scope.errors = [];
     $scope.submit = submit;
     $scope.isEnterPressed = isEnterPressed;
     $scope.isChecked = isChecked;
@@ -35,7 +41,10 @@
       $scope.detections = detections;
     };
 
-
+    $scope.remove = remove;
+    $scope.hasErrors = hasErrors;
+    $scope.isException  = isException;
+    $scope.getColor = getColor;
     function isChecked(type) {
       return $scope.selectedTypes.indexOf(type) > -1;
     }
@@ -59,17 +68,43 @@
       }
 
       $scope.processing = true;
+      $scope.errors = [];
+
       visionService.analyzeImage($scope.image.url, $scope.selectedTypes)
         .then(function(res) {
-          $scope.data = visionService.transformResult(res.data, $scope.selectedTypes).concat($scope.data);
+          if (angular.isDefined(res.data.result)) {
+            $scope.data = visionService.transformResult(res.data, $scope.selectedTypes).concat($scope.data);
+            console.log($scope.data);
+          } else {
+            $scope.errors = res.data.error;
+          }
+          
         })
         .catch(function(err) {
           console.log(err);
         })
         .finally(function() {
           $scope.processing = false;
-          $scope.image = {};
         });
+    }
+
+    function remove(index) {
+      $scope.data.splice(index, 1);
+    }
+
+    function hasErrors() {
+      return $scope.errors.length > 0;
+    }
+
+    function isException(name) {
+      return name == 'Web' || name == 'Properties';
+    }
+
+    function getColor(color) {
+      return {
+        "background-color": color,
+        "color": "white"
+      };
     }
   }
 })();

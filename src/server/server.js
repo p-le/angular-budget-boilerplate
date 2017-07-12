@@ -3,7 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const db = require('./libs/persistDb');
 const visionRouter = require('./routers/vision');
 
 const app = express();

@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Angular Pro</title>
+    <title>Google Cloud Vision Demo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -15,10 +16,65 @@
     <![endif]-->
     <div class="flexbox-parent" ng-cloak ng-controller="MainController">
       <div layout="row" layout-align="center center">
-        <form name="analyzeForm" flex="70">
+        <form name="analyzeForm" flex>
+          <fieldset class="standard" id="description">
+              <legend>Feature 説明</legend>
+                <md-list flex>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Labels</strong> - <span>画像のカテゴリーを分析</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Crops</strong> - <span>画像のCrop 画像サイズ</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Document</strong> - <span>文章の画像からテキスト抽出</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Faces</strong> - <span>顔認識－感情など</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Landmarks</strong> - <span>ランドマーク画像から場所名・位置などを分析</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Logo</strong> - <span>ロゴ画像からブランド名を認識</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Properties</strong> - <span>画像の属性を分析→カラーなど</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Safesearch</strong> - <span>アダルト・暴力コンテンツなどの分析</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div class="md-list-item-text">
+                      <strong>Text</strong> - <span>画像からテキスト抽出 (OCR - Optical Character Recognition)</span>
+                    </div>
+                  </md-list-item>
+                </md-list>
+            </fieldset>
             <md-input-container class="md-block" >
               <label>分析画像URL</label>
-              <input ng-model="image.url" ng-required="required" type="text" name="url" ng-keyup="isEnterPressed($event) && submit()"/>
+              <input 
+                ng-model="image.url" ng-required="required" 
+                type="text" name="url" 
+                ng-keyup="isEnterPressed($event) && submit()"
+                />
+
             </md-input-container>
             <fieldset class="standard">
               <legend>Features</legend>
@@ -29,31 +85,45 @@
               </md-checkbox>
             </fieldset>
             <md-button class="md-raised md-primary" ng-click="submit()">送信</md-button>
+            <input style="display:none;" id="input-file-id" type="file" file-upload accept="image/x-png,image/gif,image/jpeg" />
+            <label for="input-file-id" class="md-button md-raised md-primary">ファイルアップロード</label>
             </md-input-container>
         </form>
-        <div flex="30">
-          <div id="drop-placheholder" ple-drop>
-            画像はここにドロップ
-          </div>
-        </div>
       </div>
       <div layout="column" layout-align="center center">
         <div flex ng-if="processing">
           <md-progress-circular md-mode="indeterminate"></md-progress-circular>
         </div>
+        <div flex ng-if="hasErrors()">
+          <p>
+            <h4> {{ errors }}</h4>
+          </p>
+        </div>
       </div>
       <div layout="row" layout-align="center center" layout-wrap>
         <div flex="33" ng-repeat="item in data" >
           <md-card>
+            <md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="remove($index)">
+              <md-icon ng-bind="'clear'"></md-icon>
+            </md-button>
             <img ng-src="{{ item.url }}" class="md-card-image">
-            <md-tabs md-align-tabs="bottom" md-dynamic-height="true" md-border-bottom="false" md-center-tabs="true">
-              <md-tab ng-repeat="feature in item.features" label="{{feature.name}}">
-                <div>
+            <md-tabs 
+              md-align-tabs="bottom" md-dynamic-height="true" 
+              md-border-bottom="false" md-center-tabs="true"
+            >
+              <md-tab ng-repeat="feature in item.features track by feature.name" label="{{feature.name}}">
+                <div ng-if="!isException(feature.name)">
                   <md-chips ng-model="feature.labels" md-removable="false" readonly="true">
                     <md-chip-template>
-                      {{ $chip.description }} <span ng-if="$chip.score > 0">- {{ $chip.score | number : 2 }}</span> {{ $chip.likelihood }}
+                      {{ $chip }}
                     </md-chip-template>
                   </md-chips>
+                </div>
+                <div ng-if="feature.name == 'Web'">
+                  <p ng-repeat="label in feature.labels"> {{ label }}</p>
+                </div>
+                <div ng-if="feature.name == 'Properties'">
+                  <p ng-repeat="label in feature.labels" ng-style="getColor(label.color)">{{ label.score }}</p>
                 </div>
               </md-tab>
             </md-tabs>

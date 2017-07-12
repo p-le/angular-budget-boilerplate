@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/grunt",
-    "test": "./node_modules/.bin/karma start"
+    "test": "./node_modules/.bin/karma start",
+    "prod": "./node_modules/.bin/pm2 start src/server/server.js"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.5",
@@ -39,8 +40,7 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
-    "mongoose": "^4.11.1",
-    "nedb": "^1.8.0",
-    "sync-request": "^4.1.0"
+    "formidable": "^1.1.1",
+    "pm2": "^2.5.0"
   }
 }
