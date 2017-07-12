@@ -33,6 +33,30 @@
           Group 2 <strong>Body</strong>
         </accordion-group>
       </accordion>
+
+      <fieldset ng-rep>
+        <legend>Transclude FN</legend>
+        <div>
+          <button ng-click="model.show = !model.show">Toogle Div</button>
+          <div if="model.show" ng-init="model.count = model.count + 1">
+            {{ model.count }}
+          </div>
+        </div>
+      </fieldset>
+
+      <form name="mainForm">
+        <field type="text" ng-model="user.firstname" required>
+          <label>First Name</label>
+          <validator key="required">$fieldLabel is required</validator>
+        </field>
+        <field type="text" ng-model="user.lastname" required>
+          <label>Last Name</label>
+          <validator key="required">$fieldLabel is required</validator>
+        </field>
+      </form>
+      <div>
+        <pre> {{ user | json : 2 }}</pre>
+      </div>
     </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
