@@ -49,9 +49,9 @@
 
             childScope.$field = inputElement.controller('ngModel');
 
-            childScope.$watch('$field.dirty && $field.$error', function(errorList) {
+            childScope.$watch('$field.$dirty && $field.$error', function(errorList) {
               childScope.$fieldErrors = [];
-              console.log(childScope.errorList);
+
               angular.forEach(errorList, function(invalid, key) {
                 if (invalid) {
                   childScope.$fieldErrors.push(key);

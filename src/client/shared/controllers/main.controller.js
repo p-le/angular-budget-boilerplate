@@ -12,7 +12,9 @@
       show: false,
       count: 0
     };
-    
+    $scope.test = {
+      name: 'PHU'
+    };
     $scope.user = {
       firstname: 'LE QUANG',
       lastname: 'Phu'
