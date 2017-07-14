@@ -1,0 +1,17 @@
+<div class="ui raised  segment">
+    <h4 class="ui header">Watchlists</h4>
+    <button class="ui icon yellow button" ng-click="showModal()">
+        <i class="remove circle outline icon"></i>
+    </button>
+    <div>
+        <div ng-if="!watchlists.length" class="text-center">
+            Use <i class="plus icon"></i> to create a list
+        </div>
+        <div class="list-group">
+            <a class="list-group-item" ng-repeat="list in watchlists track by $index">
+                {{list.name}}
+                <button type="button" class="ui icon button" ng-click="deleteList(list)"><i class="plus icon"></i></button>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,9 @@
 html {
 
 }
+
+.ui {
+    &.modal {
+        display: initial !important;
+    }
+}
