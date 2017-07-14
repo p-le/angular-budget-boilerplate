@@ -1,11 +1,18 @@
 const express = require('express');
 const path = require('path');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const visionRouter = require('./routers/vision');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(compression());
+}
 
 app.use(cors())
   .use(bodyParser.json())

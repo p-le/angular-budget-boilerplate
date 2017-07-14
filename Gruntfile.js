@@ -94,7 +94,7 @@ const sass = {
 const express = {
   livereload: {
     options: {
-        port: 9000,
+        port: process.env.PORT || 80,
         bases: './public',
         monitor: {},
         debug: true,
@@ -119,4 +119,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'express', 'build', 'build-style', 'concat:vendor', 'watch' ]);
   grunt.registerTask('build', [ 'ngAnnotate', 'concat:js', 'uglify' ]);
   grunt.registerTask('build-style', [ 'sass', 'concat:css' ]);
+  grunt.registerTask('prod', ['build', 'build-style', 'concat:vendor']);
 };
