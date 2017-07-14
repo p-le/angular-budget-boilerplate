@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../../public/index.html'));
 });
 
-router.post('/analyze', passport.authenticate('digest'), (req, res) => {
+router.post('/analyze', (req, res) => {
   const url = req.body.url;
   const types = req.body.types;
 
