@@ -5,7 +5,7 @@
   "author": "phu.le.dev@gmal.com",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env PORT=9000 ENV=development ./node_modules/.bin/grunt",
+    "start": "cross-env ENV=development ./node_modules/.bin/grunt",
     "build": "cross-env ENV=production ./node_modules/.bin/grunt prod",
     "test": "./node_modules/.bin/karma start",
     "prod": "cross-env ENV=production ./node_modules/.bin/pm2 start bin/start.js --name demo",

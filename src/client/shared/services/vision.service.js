@@ -7,7 +7,7 @@
     this.analyzeImageFile = analyzeImageFile;
     this.analyzeImage = analyzeImage;
     this.transformResult = transformResult;
-    
+    var existedText = [];
     function analyzeImageFile(file, types) {
       var formData = new FormData();
       formData.append('file', file);
@@ -64,6 +64,7 @@
                   feature.labels.push(vertice);
                 });
               }
+
               break;
             case 'faceAnnotations':
               feature.name = 'Face';
@@ -72,11 +73,14 @@
                   feature.labels.push(f.slice(0, f.indexOf('Likelihood')) + ' - ' + likelihood);
                 }
               });
+
               break;
             case 'fullTextAnnotation':
-              feature.name = 'Full Text';
-              feature.labels.push(result.text);
-
+              if(!existedText.includes('fullText')) {
+                feature.name = 'Full Text';
+                feature.labels.push(result.text);
+                existedText.push('fullText');
+              }
               break;
             case 'imagePropertiesAnnotation':
               feature.name = 'Properties';
@@ -88,12 +92,14 @@
                 };
                 feature.labels.push(label);
               });
+
               break;
             case 'labelAnnotations':
               feature.name = 'label';
               angular.forEach(result, function(label) {
                 feature.labels.push(label.description + ' - ' + $filter('number')(label.score, 2));
               });
+
               break;
             case 'landmarkAnnotations':
               feature.name = 'landmark';
@@ -105,22 +111,25 @@
                 }
                 feature.labels.push(lm + pos);
               });
+
               break;
             case 'logoAnnotations':
               feature.name = 'logo';
               feature.labels.push(result[0].description + ' - ' + $filter('number')(result[0].score, 2));
+
               break;
             case 'safeSearchAnnotation':
               feature.name = 'safesearch';
 
               angular.forEach(result, function(likelihood, adult) {
-                feature.labels.push(adult + ' - ' + likelihood)
+                feature.labels.push(adult + ' - ' + likelihood);
               });
 
               break;
             case 'textAnnotations':
-              if(!angular.isObject(res.fullTextAnnotation)) {
+              if(!existedText.includes('text')) {
                 feature.name = 'text';
+                existedText.push('text');
               }
               break;
             case 'webDetection':
@@ -135,6 +144,7 @@
               angular.forEach(pageMatches, function(p) {
                 feature.labels.push(p.url);
               });
+
               break;
           }
         }
@@ -162,7 +172,7 @@
       });
       
       transformedData.push(item);
-      console.log(transformedData);
+      // console.log(transformedData);
       return transformedData;
     }
   }

@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const passport = require('../libs/passport');
 const router = express.Router();
 const VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
 
@@ -8,11 +9,11 @@ const visualRecognition = new VisualRecognitionV3({
   version_date: '2016-05-20'
 });
 
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('digest'), (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../../public/watson/index.html'));
 });
 
-router.post('/analyze', (req, res) => {
+router.post('/analyze', passport.authenticate('digest'), (req, res) => {
   let existedResult = [];
 
   const params = {

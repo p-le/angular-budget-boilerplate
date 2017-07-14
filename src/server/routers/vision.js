@@ -7,12 +7,12 @@ const formidable = require('formidable');
 const visionClient = require('../libs/visionClient');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('digest'), (req, res) => {
   console.log(req.isAuthenticated());
   res.sendFile(path.resolve(__dirname, '../../../public/index.html'));
 });
 
-router.post('/analyze', (req, res) => {
+router.post('/analyze', passport.authenticate('digest'), (req, res) => {
   const url = req.body.url;
   const types = req.body.types;
 
@@ -29,7 +29,7 @@ router.post('/analyze', (req, res) => {
     });
 });
 
-router.post('/analyzeFile', (req, res) => {
+router.post('/analyzeFile', passport.authenticate('digest'), (req, res) => {
   const form = new formidable.IncomingForm();
   let uploadFile;
   let types;
