@@ -6,9 +6,10 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env PORT=9000 ENV=development ./node_modules/.bin/grunt",
-    "build": "cross-env ENV=production ./node_modules/.bin/grunt build",
+    "build": "cross-env ENV=production ./node_modules/.bin/grunt prod",
     "test": "./node_modules/.bin/karma start",
-    "prod": "cross-env ENV=production ./node_modules/.bin/pm2 start src/server/server.js"
+    "prod": "cross-env ENV=production ./node_modules/.bin/pm2 start bin/start.js --name demo",
+    "off": "./node_modules/.bin/pm2 stop demo"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.5",
@@ -43,8 +44,10 @@
     "cors": "^2.8.3",
     "cross-env": "^5.0.1",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "formidable": "^1.1.1",
     "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
     "pm2": "^2.5.0"
   }
 }

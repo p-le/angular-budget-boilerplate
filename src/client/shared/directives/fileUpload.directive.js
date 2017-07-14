@@ -18,6 +18,7 @@
 
           visionService.analyzeImageFile(file, scope.selectedTypes)
             .then(function(res) {
+              console.log(res);
               if (angular.isDefined(res.data.result)) {
                 scope.data = visionService.transformResult(res.data, scope.selectedTypes).concat(scope.data);
               } else {
