@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('../libs/passport');
 const path = require('path');
 const fs = require('fs');
 const formidable = require('formidable');
@@ -7,10 +8,11 @@ const visionClient = require('../libs/visionClient');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  console.log(req.isAuthenticated());
   res.sendFile(path.resolve(__dirname, '../../../public/index.html'));
 });
 
-router.post('/analyze', (req, res) => {
+router.post('/analyze', passport.authenticate('digest'), (req, res) => {
   const url = req.body.url;
   const types = req.body.types;
 

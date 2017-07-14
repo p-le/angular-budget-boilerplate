@@ -8,9 +8,9 @@ var users = [
 
 function findUser(username, fn) {
   const result = users.filter(u => u.username == username);
-  console.log(username);
+
   if (result.length > 0) {
-    return fn(null, result);
+    return fn(null, result[0]);
   }
 
   return fn('Invalid Username', null);

@@ -15,23 +15,25 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(compression())
-    .use(session({
-      secret: 'AIDEMO',
-      resave: false,
-      saveUninitialized: false, 
-      cookie: {
-        secure: true
-      }
-    }))
-    .use(passport.initialize())
-    .use(passport.session());
+  app.use(compression());
 }
-
 app.use(cors())
+  .use(session({
+    secret: 'AIDEMO',
+    resave: false,
+    saveUninitialized: false, 
+    cookie: {
+      secure: true
+    }
+  }))
+  .use(passport.initialize())
+  .use(passport.session())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
   .use(express.static(path.resolve(__dirname, '../../public'), {index: false, redirect: false}));
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 app.use('/', indexRouter);
 app.use('/google', visionRouter);
