@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const passport = require('./libs/passport');
 const visionRouter = require('./routers/vision');
+const watsonRouter = require('./routers/watson');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -31,10 +32,7 @@ app.use(cors())
   .use(express.static(path.resolve(__dirname, '../../public')));
 
 app.use('/vision', visionRouter);
-
-app.get('/login', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../public/login.html'));
-});
+app.use('/watson', watsonRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../public/index.html'));
