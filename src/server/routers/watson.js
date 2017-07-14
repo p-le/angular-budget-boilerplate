@@ -8,7 +8,7 @@ const visualRecognition = new VisualRecognitionV3({
 });
 
 router.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../public/watson/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../../public/watson/index.html'));
 });
 
 router.post('/analyze', (req, res) => {

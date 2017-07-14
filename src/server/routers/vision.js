@@ -6,6 +6,10 @@ const formidable = require('formidable');
 const visionClient = require('../libs/visionClient');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../../public/index.html'));
+});
+
 router.post('/analyze', (req, res) => {
   const url = req.body.url;
   const types = req.body.types;
@@ -30,7 +34,7 @@ router.post('/analyzeFile', (req, res) => {
 
   form.parse(req);
 
-  form.on('fileBegin', function (name, file){
+  form.on('fileBegin', function (name, file) {
     file.path = path.resolve(__dirname, '../../../public/images/' + file.name);
   });
 

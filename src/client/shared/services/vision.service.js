@@ -13,7 +13,7 @@
       formData.append('file', file);
       formData.append('types', types);
 
-      return $http.post('/vision/analyzeFile', formData, {
+      return $http.post('/google/analyzeFile', formData, {
         headers: { 'Content-Type': undefined }
       });
     }
@@ -25,7 +25,7 @@
         types: types
       };
 
-      return $http.post('/vision/analyze', data);
+      return $http.post('/google/analyze', data);
     }
 
     function transformResponse(res) {

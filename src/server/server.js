@@ -8,12 +8,13 @@ const cors = require('cors');
 const passport = require('./libs/passport');
 const visionRouter = require('./routers/vision');
 const watsonRouter = require('./routers/watson');
+const indexRouter = require('./routers/index');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const app = express();
 
-// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(compression())
     .use(session({
       secret: 'AIDEMO',
@@ -25,17 +26,15 @@ const app = express();
     }))
     .use(passport.initialize())
     .use(passport.session());
+}
 
 app.use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
-  .use(express.static(path.resolve(__dirname, '../../public')));
+  .use(express.static(path.resolve(__dirname, '../../public'), {index: false, redirect: false}));
 
-app.use('/vision', visionRouter);
+app.use('/', indexRouter);
+app.use('/google', visionRouter);
 app.use('/watson', watsonRouter);
-
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
-});
 
 module.exports = app;
