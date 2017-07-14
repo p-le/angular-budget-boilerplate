@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
 
