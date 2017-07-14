@@ -23,19 +23,13 @@ router.post('/analyze', (req, res) => {
       console.log(err);
       res.json({ error: err });
     } else {
+      
+      const jsonResult = result.images.map((img, index) => ({
+        url: img.resolved_url,
+        classifiers: img.classifiers
+      }));
 
-      const insertResults = await Promise.all(
-        result.images.map(async (img) => {
-          const r = new Result({
-            url: img.resolved_url,
-            classifiers: img.classifiers
-          });
-          return r.save();
-        })
-      );
-
-      console.log(insertResults);
-      res.json(insertResults);
+      res.json(jsonResult);
     }
   });
 });
