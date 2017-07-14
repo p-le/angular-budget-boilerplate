@@ -44,7 +44,7 @@ router.post('/analyzeFile', (req, res) => {
 
   form.on('end', () => {
     const PORT = process.env.PORT || 80;
-    const url = `http://172.16.115.96:${PORT}/images/${uploadFile.name}`;
+    const url = `http://${req.get('host')}:${PORT}/images/${uploadFile.name}`;
     const imageFile = fs.readFileSync(uploadFile.path);
     const encoded = new Buffer(imageFile, 'base64');
     types = types.split(',');
