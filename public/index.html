@@ -101,7 +101,7 @@
         </div>
       </div>
       <div layout="row" layout-align="center center" layout-wrap>
-        <div flex="33" ng-repeat="item in data" >
+        <div flex="50" ng-repeat="item in data" >
           <md-card>
             <md-button class="md-fab md-mini" aria-label="Eat cake" ng-click="remove($index)">
               <md-icon ng-bind="'clear'"></md-icon>
@@ -111,7 +111,7 @@
               md-align-tabs="bottom" md-dynamic-height="true" 
               md-border-bottom="false" md-center-tabs="true"
             >
-              <md-tab ng-repeat="feature in item.features track by feature.name" label="{{feature.name}}">
+              <md-tab ng-repeat="feature in item.features track by feature.name + $index" label="{{feature.name}}">
                 <div ng-if="!isException(feature.name)">
                   <md-chips ng-model="feature.labels" md-removable="false" readonly="true">
                     <md-chip-template>

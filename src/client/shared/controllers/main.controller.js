@@ -19,15 +19,16 @@
       'similar'
     ];
     $scope.selectedTypes = [
-      // 'labels',
-      // 'crops',
-      // 'document',
-      // 'faces',
-      // 'landmarks',
-      // 'logos',
-      // 'properties',
-      // 'safeSearch',
-      // 'text'
+      'labels',
+      'crops',
+      'document',
+      'faces',
+      'landmarks',
+      'logos',
+      'properties',
+      'safeSearch',
+      'text',
+      'similar'
     ];
     $scope.processing = false;
     $scope.image = {};
