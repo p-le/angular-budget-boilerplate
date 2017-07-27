@@ -6,6 +6,7 @@
 
   function MainController($scope, visionService) {
     $scope.data = [];
+    $scope.resultJson = null;
     $scope.types = [
       'labels',
       'crops',
@@ -75,11 +76,11 @@
         .then(function(res) {
           if (angular.isDefined(res.data.result)) {
             $scope.data = visionService.transformResult(res.data, $scope.selectedTypes).concat($scope.data);
-            console.log($scope.data);
           } else {
             $scope.errors = res.data.error;
+            
           }
-          
+          $scope.resultJson = res.data.result || res.data.error;
         })
         .catch(function(err) {
           console.log(err);

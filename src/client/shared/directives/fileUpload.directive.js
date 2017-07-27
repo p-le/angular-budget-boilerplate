@@ -24,6 +24,7 @@
               } else {
                 scope.errors = res.data.error;
               }
+              scope.resultJson = res.data.result || res.data.error;
             })
             .catch(function(err) {
               console.log(err);

@@ -130,6 +130,9 @@
           </md-card>
         </div>
       </div>
+      <div layout="row" layout-align="center center" layout-wrap>
+        <pre ng-if="resultJson">{{resultJson | json}}</pre>
+      </div>
     </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
