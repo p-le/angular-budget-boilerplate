@@ -1,70 +1,20 @@
-#### Project Structure
+<div align="center"><strong>AngularJS  Javascript Budget Boilerplate</strong></div>
+<div align="center">Fast + Beginner Boilerplate to try AngularJS with plain Javascript</div>
+<br />
+<div align="center">
+  <sub>Built with &hearts; by Phu Le</sub>
+</div>
+<br />
 
-```
-mkdir src
-mkdir public
-mkdir src/client
-mkdir src/server
-```
+## Quick start
 
-#### Dev Dependencies
+1. Clone this repo using `git clone --depth=1 https://github.com/p-le/angular-budget-boilerplate.git`
+2. Move to the appropriate directory: `cd angular-budget-boilerplate
+`.<br />
+3. Run `yarn install` in order to install dependencies and clean the git repo.<br />
 
-##### Angular
+Now you're ready to start! `yarn start`
 
-* Angular
-* Angular UI Router
-* Angular Animate
+## License
 
-```
-yarn add angular angular-animate angular-ui-router
-```
-
-##### Backend
-
-* Express
-* Body-parser
-* Mongoose
-* CORS
-
-```
-yarn add mongoose express body-parser cors
-```
-
-##### Unit Test
-
-* Karma
-* Jasmine
-
-```
-yarn add --dev karma karma-jasmine jasmine-core karma-chrome-launcher karma-spec-reporter karma-coverage
-```
-
-* Angular Mocks
-
-```
-yarn add --dev angular-mocks
-```
-
-##### Task Runner
-
-* Grunt
-* Grunt Angular Templates Build
-* Grunt Sass
-* Grunt Angular Annotate
-* Grunt Watch
-* Grunt Express
-* Grunt Concat
-* Grunt Uglify
-
-```
-yarn add --dev grunt grunt-angular-templates grunt-sass grunt-ng-annotate grunt-contrib-watch grunt-express grunt-contrib-concat grunt-contrib-uglify grunt-parallel
-```
-
-##### Style Check
-
-```
-yarn add --dev jshint
-```
-
-
-
+This project is licensed under the MIT license, Copyright (c) 2017 P-LE
