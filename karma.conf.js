@@ -15,7 +15,7 @@ module.exports = (config) => {
       'src/client/**/*.e2e.spec.js'
     ],
     preprocessors: {
-      'src/client/**/!(*.spec).js': ['coverage']
+      'src/client/**/!(*.pec).js': ['coverage']
     },
     reporters: ['spec', 'coverage'],
     coverageReporter: {
@@ -32,7 +32,7 @@ module.exports = (config) => {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: (process.env.NODE_ENV == "production") ? true : false,
     concurrency: Infinity
   });
 };

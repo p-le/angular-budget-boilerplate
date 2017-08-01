@@ -1,11 +1,14 @@
 describe('> TodoController', function() {
-  var scope = { };
+  var scope;
 
-  beforeEach(module('angularPro'));
+  beforeEach(function() {
+    module('angularPro');
 
-  beforeEach(inject(function($controller) {
-    $controller('TodoController', { $scope: scope });
-  }));
+    inject(function($controller, $rootScope) {
+      scope = $rootScope.$new();
+      $controller('TodoController', { $scope: scope });
+    });
+  });
 
   it('should define a list object', function() {
     expect(scope.list).toBeDefined();

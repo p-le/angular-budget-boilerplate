@@ -4,6 +4,7 @@ node_js:
 cache: yarn
 before_script:
   - yarn install
+  - "export NODE_ENV=production"
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
