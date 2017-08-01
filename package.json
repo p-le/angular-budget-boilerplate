@@ -6,10 +6,12 @@
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/grunt",
-    "test": "./node_modules/.bin/karma start"
+    "test": "./node_modules/.bin/karma start",
+    "test:e2e": "./node_modules/.bin/protractor protractor.config.js"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.5",
+    "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
@@ -25,7 +27,8 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
-    "karma-spec-reporter": "^0.0.31"
+    "karma-spec-reporter": "^0.0.31",
+    "protractor": "^5.1.2"
   },
   "dependencies": {
     "angular": "^1.6.5",

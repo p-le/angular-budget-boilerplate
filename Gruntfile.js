@@ -71,6 +71,10 @@ const uglify = {
   js: {
     src: 'public/app.js',
     dest: 'public/app.min.js'
+  },
+  jsvendor: {
+    src: 'public/vendor.js',
+    dest: 'public/vendor.min.js'
   }
 };
 

@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - 7
+cache: yarn
+before_script:
+  - yarn install
+script:
+  - yarn test
+  - yarn test:e2e
+after_success:
+  - cat __coverage__/report-lcov/lcov.info | ./node_modules/.bin/coveralls
+  - yarn run build
+
+deploy:
+  provider: pages
+  local_dir: public
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
