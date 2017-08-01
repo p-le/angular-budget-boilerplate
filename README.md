@@ -2,6 +2,10 @@
 <div align="center">Fast + Beginner Boilerplate to try AngularJS with plain Javascript</div>
 <br />
 <div align="center">
+  <a href='https://coveralls.io/github/p-le/angular-budget-boilerplate?branch=master'><img src='https://coveralls.io/repos/github/p-le/angular-budget-boilerplate/badge.svg?branch=master' alt='Coverage Status' /></a>
+  <a href='https://coveralls.io/github/p-le/angular-budget-boilerplate?branch=master'><img src='https://travis-ci.org/p-le/angular-budget-boilerplate.svg?branch=master' alt='Travis Status' /></a>
+</div>
+<div align="center">
   <sub>Built with &hearts; by Phu Le</sub>
 </div>
 <br />
