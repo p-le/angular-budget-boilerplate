@@ -1,0 +1,59 @@
+$primary-color: #1abc9c;
+$info-color: #3498db;
+$danger-color: #e74c3c;
+$success-color: #2ecc71;
+
+.btn {
+    padding: 0.6rem 2.1rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    background-image: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: $primary-color;
+
+    &:hover {
+        background-color: lighten($primary-color, 8);
+    }
+}
+
+.btn-info {
+    color: #fff;
+    background-color: $info-color;
+
+    &:hover {
+        background-color: lighten($info-color, 8);
+    }
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: $danger-color;
+
+    &:hover {
+        background-color: lighten($danger-color, 8);
+    }
+}
+
+.btn-success {
+    color: #fff;
+    background-color: $success-color;
+
+    &:hover {
+        background-color: lighten($success-color, 8);
+    }
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f1c40f;
+}

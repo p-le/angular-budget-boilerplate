@@ -51,15 +51,15 @@ const concat = {
 const watch = {
   js: {
     files: [ 'src/client/**/*.js', '!src/client/**/*.spec.js' ],
-    tasks: [ 'build' ]
+    tasks: [ 'build:dev' ]
   },
   css: {
     files: 'src/client/**/*.scss',
-    tasks: [ 'build-style' ]
+    tasks: [ 'build:dev' ]
   },
   html: {
     files: 'src/client/templates/*.html',
-    tasks: [ 'build' ]
+    tasks: [ 'build:dev' ]
   },
   server: {
     files: [ 'src/server/**/*.js' ],
