@@ -8,28 +8,28 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('templates/addlist-modal.html',
-    "<div class=\"ui modal\">\n" +
-    "    <i class=\"close icon\"></i>\n" +
-    "    <div class=\"header\">\n" +
-    "        <h4>Create New Watchlist</h4>\n" +
+  $templateCache.put('templates/dashboard.html',
+    "<div class=\"ui pointing menu\">\n" +
+    "    <a class=\"active item\">\n" +
+    "    Home\n" +
+    "    </a>\n" +
+    "    <a class=\"item\">\n" +
+    "    Messages\n" +
+    "    </a>\n" +
+    "    <a class=\"item\">\n" +
+    "    Friends\n" +
+    "    </a>\n" +
+    "    <div class=\"right menu\">\n" +
+    "    <div class=\"item\">\n" +
+    "        <div class=\"ui transparent icon input\">\n" +
+    "        <input type=\"text\" placeholder=\"Search...\">\n" +
+    "        <i class=\"search link icon\"></i>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"content\">\n" +
-    "        <form name=\"listForm\" class=\"ui form\">\n" +
-    "            <div class=\"field\">\n" +
-    "                <label for=\"list-name\">Name</label>\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"list-name\" placeholder=\"Name this watchlist\" ng-model=\"watchlist.name\" required>\n" +
-    "            </div>\n" +
-    "            <div class=\"field\">\n" +
-    "                <label for=\"list-description\">Brief Description</label>\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"list-description\" maxlength=\"40\" placeholder=\"Describe this watchlist\" ng-model=\"watchlist.description\" required>\n" +
-    "            </div>\n" +
-    "            <div class=\"modal-footer\">\n" +
-    "                <button type=\"submit\" class=\"ui button\" ng-click=\"createList()\" ng-disabled=\"!listForm.$valid\">Create</button> \n" +
-    "                <button type=\"button\" class=\"ui button\" ng-click=\"$hide()\">Cancel</button>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
     "    </div>\n" +
+    "</div>\n" +
+    "<div class=\"ui container\">\n" +
+    "    <p-watchlist-panel></p-watchlist-panel>\n" +
     "</div>"
   );
 
@@ -51,13 +51,20 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "        <div ng-if=\"!watchlists.length\" class=\"text-center\">\n" +
     "            Use <i class=\"plus icon\"></i> to create a list\n" +
     "        </div>\n" +
-    "        <div class=\"list-group\">\n" +
-    "            <a class=\"list-group-item\" ng-repeat=\"list in watchlists track by $index\">\n" +
+    "        <div class=\"ui list\">\n" +
+    "            <a class=\"item\" ng-repeat=\"list in watchlists track by $index\" ng-click=\"viewList(list.id)\">\n" +
     "                {{list.name}}\n" +
-    "                <button type=\"button\" class=\"ui icon button\" ng-click=\"deleteList(list)\"><i class=\"plus icon\"></i></button>\n" +
+    "                <button type=\"button\" class=\"ui icon button\" ng-click=\"deleteList(list)\"><i class=\"remove icon\"></i></button>\n" +
     "            </a>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/watchlist.html',
+    "<div>\n" +
+    "    Hello World\n" +
     "</div>"
   );
 

@@ -7,10 +7,10 @@
         <div ng-if="!watchlists.length" class="text-center">
             Use <i class="plus icon"></i> to create a list
         </div>
-        <div class="list-group">
-            <a class="list-group-item" ng-repeat="list in watchlists track by $index">
+        <div class="ui list">
+            <a class="item" ng-repeat="list in watchlists track by $index" ng-click="viewList(list.id)">
                 {{list.name}}
-                <button type="button" class="ui icon button" ng-click="deleteList(list)"><i class="plus icon"></i></button>
+                <button type="button" class="ui icon button" ng-click="deleteList(list)"><i class="remove icon"></i></button>
             </a>
         </div>
     </div>

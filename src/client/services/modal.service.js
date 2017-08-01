@@ -57,7 +57,7 @@
                     deferred.reject(err);
                 });
             
-                return deferred.promise;
+            return deferred.promise;
         }
     }
 })();

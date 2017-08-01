@@ -4,7 +4,7 @@
     .module('angularPro')
     .directive('pWatchlistPanel', pWatchlistPanel);
 
-    function pWatchlistPanel(ModalService, WatchlistService, $location) {
+    function pWatchlistPanel(ModalService, WatchlistService, $state, $stateParams) {
         var directive = {
             restrict: 'E',
             scope: {},
@@ -18,17 +18,24 @@
             scope.showModal = showModal;
             scope.createList = createList;
             scope.deleteList = deleteList;
+            scope.viewList = viewList;
+
+            function viewList(listId) {
+                $state.go('Watchlist', {
+                    listId: listId
+                });
+            }
 
             function showModal() {
                 ModalService.show({
-                    templateUrl: 'templates/addlist-modal.html'
+                    templateUrl: 'templates/modals/addlist.html',
+                    scope: scope
                 }).then(function(modal) {
                     console.log(modal);
                 })
                 .catch(function(err) {
                     console.log(err);
                 });
-                
             }
 
             function createList() {
@@ -39,7 +46,7 @@
 
             function deleteList(list) {
                 WatchlistService.remove(list);
-                $location.path('/');
+                $state.go('/');
             }
         }
 

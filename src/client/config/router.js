@@ -2,21 +2,27 @@
   'use strict';
   angular
     .module('angularPro')
-    .config(function($stateProvider) {
-      var mainState = {
-        name: 'Main',
-        url: '/',
-        templateUrl: 'templates/main.html'
+    .config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+      var dashboardState = {
+        name: 'Dashboard',
+        url: '/dashboard',
+        templateUrl: 'templates/dashboard.html',
+        controller: 'DashboardController'
       };
 
-      var aboutState = {
-        name: 'About',
-        url: '/about',
-        templateUrl: 'templates/about.html'
+      var watchlistState = {
+        name: 'Watchlist',
+        url: '/watchlist/:listId',
+        templateUrl: 'templates/watchlist.html',
+        controller: 'WatchlistController'
       };
 
       $stateProvider
-        .state(mainState)
-        .state(aboutState);
+        .state(dashboardState)
+        .state(watchlistState);
+
+      $urlRouterProvider.otherwise('/dashboard');
+
+      $locationProvider.html5Mode(true);
     });
 })();
