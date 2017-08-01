@@ -15,7 +15,7 @@ module.exports = (config) => {
       'src/client/**/*.e2e.spec.js'
     ],
     preprocessors: {
-      'src/client/**/!(*.pec).js': ['coverage']
+      'src/client/**/!(*.spec).js': ['coverage']
     },
     reporters: ['spec', 'coverage'],
     coverageReporter: {

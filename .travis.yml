@@ -8,7 +8,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
-script: yarn test && yarn test:e2e
+script: yarn test
 after_success:
   - cat __coverage__/report-lcov/lcov.info | ./node_modules/.bin/coveralls
   - yarn run build
