@@ -70,11 +70,11 @@ const watch = {
 const uglify = {
   js: {
     src: 'public/app.js',
-    dest: 'public/app.min.js'
+    dest: 'public/app.js'
   },
   jsvendor: {
     src: 'public/vendor.js',
-    dest: 'public/vendor.min.js'
+    dest: 'public/vendor.js'
   }
 };
 
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
 
   plugins.forEach(p => grunt.loadNpmTasks(p));
 
-  grunt.registerTask('default', [ 'express', 'build', 'build-style', 'concat:vendor', 'watch' ]);
-  grunt.registerTask('build', [ 'ngAnnotate', 'ngtemplates', 'concat:js', 'uglify' ]);
-  grunt.registerTask('build-style', [ 'sass', 'concat:css' ]);
+  grunt.registerTask('default', [ 'express', 'build:dev', 'watch' ]);
+  grunt.registerTask('build:dev', [ 'ngAnnotate', 'ngtemplates', 'concat:js', 'concat:vendor', 'sass', 'concat:css' ]);
+  grunt.registerTask('build:prod', [ 'ngAnnotate', 'ngtemplates', 'concat:js', 'concat:vendor', 'sass', 'concat:css', 'uglify' ]);
 };
