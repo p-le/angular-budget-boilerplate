@@ -3,32 +3,32 @@ $color: #3498db;
 .topnav {
   background-color: $color;
   overflow: hidden;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  height: 4rem;
+  line-height: 4rem;
+  white-space: nowrap;
 
   header {
     float: left;
     padding-left: 2rem;
     text-align: center;
     color: #fff;
-    padding: 0.5rem 1rem;
     font-weight: bold;
-    line-height: 2;
     font-size: 1.5rem;
   }
 
-  nav { 
+  nav {
     float: right;
     padding-right: 2rem;
-    
+    overflow: hidden;
     a {
       float: right;
       display: block;
       color: #fff;
       font-size: 1rem;
-      padding: 0.5rem 1rem;
+      padding: 0 1rem;
       text-decoration: none;
-      line-height: 3;
       transition: background-color .4s ease;
-      height: 100%;
 
       &:hover {
         background-color: lighten($color, 8);

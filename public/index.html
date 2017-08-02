@@ -6,26 +6,16 @@
     <title>Angular Pro</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 
   </head>
-  <body>
+  <body ng-controller="MainCtrl">
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
     <p-topnav></p-topnav>
-    <p-sidenav></p-sidenav>
     <div ng-view></div>
-    <fieldset ng-controller="ButtonCtrl as ctrl">
-      <legend>{{ ::ctrl.title }}</legend>
-      <p-button text="Default"></p-button>
-      <p-button modifier="primary" text="Primary"></p-button>
-      <p-button modifier="info" text="Info"></p-button>
-      <p-button modifier="danger" text="Danger"></p-button>
-      <p-button modifier="success" text="Success" ng-click="ctrl.handleClick()"></p-button>
-      <p-button modifier="warning" text="Warning"></p-button>
-      <p-button ng-disabled="true" text="Disabled"></p-button>
-    </fieldset>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
   </body>

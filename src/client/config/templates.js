@@ -1,22 +1,29 @@
 angular.module('angularPro').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('templates/news.html',
+  $templateCache.put('templates/components.html',
+    "<fieldset>\n" +
+    "  <legend>Button Directives</legend>\n" +
+    "  <p-button text=\"Default\"></p-button>\n" +
+    "  <p-button modifier=\"primary\" text=\"Primary\"></p-button>\n" +
+    "  <p-button modifier=\"info\" text=\"Info\"></p-button>\n" +
+    "  <p-button modifier=\"danger\" text=\"Danger\"></p-button>\n" +
+    "  <p-button modifier=\"success\" text=\"Success\"></p-button>\n" +
+    "  <p-button modifier=\"warning\" text=\"Warning\"></p-button>\n" +
+    "  <p-button ng-disabled=\"true\" text=\"Disabled\"></p-button>\n" +
+    "</fieldset>"
+  );
+
+
+  $templateCache.put('templates/demo.html',
     "<div>\n" +
-    "  <p>{{ ctrl.news }}</p>\n" +
+    "  Demo\n" +
     "</div>"
   );
 
 
   $templateCache.put('templates/sidenav.html',
-    "<aside>\n" +
-    "  <ul>\n" +
-    "    <li><a href=\"#/!\">Home</a></li>\n" +
-    "    <li><a href=\"#!red\">Home</a></li>\n" +
-    "    <li><a href=\"#!green\">Home</a></li>\n" +
-    "    <li><a href=\"#!blue\">Home</a></li>\n" +
-    "  </ul>\n" +
-    "</aside>"
+    "<aside ng-class=\"navClass\" ng-transclude></aside>"
   );
 
 
@@ -24,10 +31,8 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "<div>\n" +
     "  <header>AngularJS</header>\n" +
     "  <nav>\n" +
-    "    <a href=\"#!home\">Home</a>\n" +
-    "    <a href=\"#!news\">News</a>\n" +
-    "    <a href=\"#!contact\">Contact</a>\n" +
-    "    <a href=\"#!about\">About</a>\n" +
+    "    <a href=\"#!demo\">Demo</a>\n" +
+    "    <a href=\"#!home\">Components</a>\n" +
     "  </nav>\n" +
     "</div>"
   );

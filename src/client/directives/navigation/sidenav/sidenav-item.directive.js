@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('angularPro')
-    .directive('pSidenav', pSidenav);
+    .directive('pSidenavItem', pSidenavItem);
   
-  function pSidenav() {
+  function pSidenavItem() {
     var directive = {
       scope: {},
       restrict: 'E',
