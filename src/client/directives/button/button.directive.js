@@ -1,9 +1,9 @@
 (function() {
     angular.module('angularPro')
-        .directive('pButton', pButtonDirective);
+    .directive('pButton', pButtonDirective);
 
     function pButtonDirective($log) {
-        const modifiers = [
+        var modifiers = [
             'default',
             'primary',
             'info',
@@ -11,23 +11,25 @@
             'success',
             'warning',
             'disabled'
-        ]
+        ];
+
         return {
-            scope: {
-            },
+            scope: {},
             transclude: true,
             restrict: 'E',
             replace: true,
-            template: '<button ng-transclude></button>',
+            template: '<button></button>',
             compile: function(tEle, tAttrs) {
                 var modifier = tAttrs.modifier || 'default';
+
                 if (modifiers.indexOf(modifier) == -1) {
                     $log.error("Button [modifier] only receive value 'default' | 'primary' | 'info' | 'danger' | 'succes' | 'warning' | 'disabled' ");
                     return false;
                 }
                 tEle.addClass('btn btn-' + modifier);
+
                 return function (scope, element, attrs) {
-                    console.log(scope);
+                    element.text(attrs.text);
                 };
             }
         }

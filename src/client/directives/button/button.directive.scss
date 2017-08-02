@@ -1,0 +1,36 @@
+$modifiers: "primary" "info" "danger" "success" "warning";
+$colors: #1abc9c #3498db #e74c3c #2ecc71 #f1c40f;
+
+.btn {
+    padding: 0.5rem 2.4rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    background-image: none;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    transition: background-color .3s ease;
+
+    &.disabled {
+        background-color: #bdc3c7;
+        border-color: #bdc3c7;
+    }
+}
+
+@each $modifier in $modifiers {
+    $i: index($modifiers, $modifier);
+    $color: nth($colors, $i);
+
+    .btn-#{$modifier} {
+        color: #fff;
+        background-color: $color;
+        
+        &:hover {
+            background-color: lighten($color, 8);
+        }
+    }
+}

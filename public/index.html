@@ -13,26 +13,19 @@
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <div ng-controller="TodoController">
-      <ul ng-repeat="item in list">
-        <li>{{ item }}</li>
-      </ul>
-    </div>
-    <fieldset>
-      <legend>Button</legend>
-      <p-button modifier="primary">Test</p-button>
-      <p-button modifier="info">Test</p-button>
-      <p-button modifier="danger">Test</p-button>
-      <p-button modifier="success">Test</p-button>
-      <p-button modifier="warning">Test</p-button>
+    <p-topnav></p-topnav>
+    <p-sidenav></p-sidenav>
+    <div ng-view></div>
+    <fieldset ng-controller="ButtonCtrl as ctrl">
+      <legend>{{ ::ctrl.title }}</legend>
+      <p-button text="Default"></p-button>
+      <p-button modifier="primary" text="Primary"></p-button>
+      <p-button modifier="info" text="Info"></p-button>
+      <p-button modifier="danger" text="Danger"></p-button>
+      <p-button modifier="success" text="Success" ng-click="ctrl.handleClick()"></p-button>
+      <p-button modifier="warning" text="Warning"></p-button>
+      <p-button ng-disabled="true" text="Disabled"></p-button>
     </fieldset>
-    <div ng-controller="CommentController">
-      <input type='text' ng-model='newComment' />
-      <button type='button' ng-click='add(newComment)'>Submit</button>
-      <ul ng-repeat="comment in comments">
-        <li>{{ comment }}</li>
-      </ul>
-    </div>
     <script src="vendor.js"></script>
     <script src="app.js"></script>
   </body>

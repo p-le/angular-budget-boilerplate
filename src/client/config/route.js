@@ -6,9 +6,14 @@
                 .when('/emcees/:id', {
                     controller: 'EmceesController'
                 })
+                .when('/news', {
+                    templateUrl: 'templates/news.html',
+                    controller: 'NewsCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .when('/home', {
                     templateUrl: 'templates/home.html',
-                    controller: 'HomeCtrl'
+                    controller: 'HomeCtrl',
                 })
                 .otherwise({
                     redirectTo: '/'
