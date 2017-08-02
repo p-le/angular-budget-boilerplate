@@ -11,7 +11,7 @@
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'templates/sidenav.html',
+      templateUrl: 'directives/navigation/sidenav/sidenav.html',
       compile: function(tEle, tAttrs) {
         
         return function(scope, element, attrs) {

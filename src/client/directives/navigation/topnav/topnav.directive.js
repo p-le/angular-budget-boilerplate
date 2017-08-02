@@ -8,7 +8,7 @@
       scope: {},
       restrict: 'E',
       replace: true,
-      templateUrl: 'templates/topnav.html',
+      templateUrl: 'directives/navigation/topnav/topnav.html',
       compile: function(tEle, tAttrs) {
         tEle.addClass('topnav');
         return function(scope, element, attrs) {

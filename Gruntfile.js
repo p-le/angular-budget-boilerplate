@@ -102,7 +102,7 @@ const ngtemplates = {
       module: "angularPro"
     },
     cwd: 'src/client',
-    src: "templates/*.html",
+    src: "**/*.html",
     dest: "src/client/config/templates.js"
   }
 };
