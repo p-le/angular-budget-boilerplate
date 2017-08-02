@@ -1,3 +1,105 @@
-<form novalidate name="edit-form">
+<div class="form">
+    <form novalidate name="edit-form" ng-submit="submit()">
+        <div>
+            <label for"test">Test</label>
+            <input type="checkbox" ng-model="ad.test" id="test"/>
+        </div>
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" ng-model="ad.name" id="name"/>
+        </div>
+        <div>
+            <label for="advertiserId">Advertiser</label>
+            <select 
+                ng-model="selectedAdvertiser" 
+                required 
+                name="advertiserId" 
+                id="advertiserId"
+                ng-options="advertiser.name for advertiser in advertisers track by advertiser.id"
+            >
+                <option value="">Select Advertiser</option>
+            </select>
+        </div>
+        <div ng-if="ad.advertiserId">
+            <label for="campaignId"><C></C>ampaign</label>
+            <select
+                ng-model="$parent.selectedCampaign"
+                name="campaignId"
+                id="campaignId"
+                ng-options="campaign.name for campaign in campaigns track by campaign.id"
+            >
+                <option value="">Select Campaign</option>
+            </select>
+        </div>
+        <div>
+            <label for="adCategory">Ad Category</label>
+            <select
+                ng-model="selectedAdCategory"
+                name="adCategory"
+                id="adCategory"
+                ng-options="adCategory.name for adCategory in adCategories track by adCategory.id"
+            >
+                <option value="">Select Ad Category</option>
+            </select>
+        </div>
+        <div>
+            <label>OS</label>
+            <input type="checkbox" ng-change="onChange()">
+            <input type="checkbox" ng-change="onChange()">
+            <input type="checkbox" ng-change="onChange()">
+            <input type="checkbox" ng-change="onChange()">
+        </div>
+        <hr />
+        <div>
+            <label>Click Expire</label>
+            <select ng-model="ad.clickTimeUnit" ng-options="clickTimeUnit for clickTimeUnit in clickTimeUnits">
+                <option value="">----</option>
+            </select>
+            <input type="number" ng-if="ad.clickTimeUnit" ng-model="ad.clickExpire" name="clickExpire" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+        </div>
+        <div>
 
-</form>
+        </div>
+        <div>
+            <label>SessionID Duplicate Check</label>
+            <input type="radio" ng-model="ad.isNeedCheckCvDuplicationXuid" ng-value="true" /> Yes
+            <input type="radio" ng-model="ad.isNeedCheckCvDuplicationXuid" ng-value="false" /> No <br/>
+        </div>
+        <hr />
+        <div>
+            <label name="announceCount">Announce Count</label>
+            <input type="number" ng-model="ad.announceCount" name="announceCount" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+        </div>
+        <div>
+            <label name="announceCount">Announce Days</label>
+            <input type="number" ng-model="ad.announceDays" name="announceDays" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+        </div>
+        <div>
+            <label for="adminNote">Admin note</label>
+            <textarea ng-model="ad.adminNote" ng-attr-placeholder="Admin Note"></textarea>
+        </div>
+        <hr />
+        <div>
+            <label for="creativeType">Creative Type</label>
+            <select ng-model="ad.creativeType" name="creativeType" id="creativeType" ng-options="creativeType for creativeType in creativeTypes" required>
+
+            </select>
+        </div>
+        <div>
+            <label for="maxCreativeNum">Max Creative Num</label>
+            <select
+                ng-model="ad.maxCreativeNum"
+                name="maxCreativeNum"
+                id="maxCreativeNum"
+                ng-options="maxCreativeNum for maxCreativeNum in [] | range:20"
+            >
+
+            </select>
+        </div>
+        <button>Submit</button>
+    </form>
+
+    <pre>
+        {{ ad | json }}
+    </pre>
+</div>
