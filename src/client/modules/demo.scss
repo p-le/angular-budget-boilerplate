@@ -1,21 +1,14 @@
-.form {
+.wrapper {
     margin: 1rem auto;
-    text-align:center;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
 
-    form {
-        width: 70%;
-        display: inline-block;
-        font-size: 1.3rem;
-        text-align: left;
-    }
     div {
-        margin: 1rem 0;
+        margin: 1rem 1rem;
     }
-
-    pre {
-        width: 70%;
-        display: inline-block;
-        text-align: left;
-        font-size: 1.3rem;
+    .json {
+        display: flex;
+        align-items: center;
     }
 }
