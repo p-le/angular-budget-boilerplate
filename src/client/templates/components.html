@@ -14,6 +14,9 @@
 </fieldset>
 <fieldset>
   <legend>Checkbox</legend>
+  <input type="checkbox" ng-model="test" />
+  <p-multi-checkbox ng-model="test" has-select-all="true"></p-multi-checkbox>
+  <pre>{{ test | json }}</pre>
 </fieldset>
 <fieldset>
   <legend>Multi-Checkbox</legend>

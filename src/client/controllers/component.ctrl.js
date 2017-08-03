@@ -4,6 +4,6 @@
     .controller('ComponentCtrl', ComponentCtrl);
   
   function ComponentCtrl($scope) {
-
+    $scope.test = false;
   }
 })();

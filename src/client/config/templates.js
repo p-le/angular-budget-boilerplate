@@ -1,6 +1,14 @@
 angular.module('angularPro').run(['$templateCache', function($templateCache) {
   'use strict';
 
+  $templateCache.put('directives/checkbox/multi-checkbox.html',
+    "<div>\n" +
+    "  <label>Test Checkbox</label>\n" +
+    "  <input type=\"checkbox\" />\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('directives/navigation/sidenav/sidenav.html',
     "<aside ng-class=\"navClass\" ng-transclude></aside>"
   );
@@ -48,6 +56,9 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "</fieldset>\n" +
     "<fieldset>\n" +
     "  <legend>Checkbox</legend>\n" +
+    "  <input type=\"checkbox\" ng-model=\"test\" />\n" +
+    "  <p-multi-checkbox ng-model=\"test\" has-select-all=\"true\"></p-multi-checkbox>\n" +
+    "  <pre>{{ test | json }}</pre>\n" +
     "</fieldset>\n" +
     "<fieldset>\n" +
     "  <legend>Multi-Checkbox</legend>\n" +
