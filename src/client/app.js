@@ -1,7 +1,7 @@
 (function() {
   angular.module('angularPro', [
     'ngAnimate',
+    'ngResource',
     'ngRoute'
   ]);
-  angular.module('angularPro.ui', []);
 })();

@@ -27,7 +27,7 @@
                     ng-model="$parent.selectedCampaign"
                     name="campaignId"
                     id="campaignId"
-                    ng-options="campaign.name for campaign in campaigns | filter: { advertiserId: selectedAdvertiser.id } track by campaign.id "
+                    ng-options="campaign.name for campaign in campaigns | filter: { advertiser_id: selectedAdvertiser.id } track by campaign.id "
                 >
                     <option value="">選択</option>
                 </select>
@@ -53,7 +53,7 @@
             </div>
             <div>
                 <label>OS: </label>
-                <label><input type="checkbox" ng-click="toggleOsAll()" ng-checked="os.length == ad.os.length" />All</label>
+                <label><input type="checkbox" ng-click="toggleOsAll()" ng-checked="os.length == ad.os.length" />全選択</label>
                 <label ng-repeat="item in os">
                     <input
                         type="checkbox"
@@ -67,6 +67,17 @@
             <div>
                 <label for"optionApp">アプリ広告</label>
                 <input type="checkbox" ng-model="ad.optionApp" name="optionApp" id="optionApp"/>
+            </div>
+            <div ng-if="ad.optionApp == true">
+                <label for="cvAppId">アプリ</label>
+                <select
+                    ng-model="ad.cvAppId"
+                    name="cvAppId"
+                    id="cvAppId"
+                    ng-options="app.name for app in apps track by app.id"
+                >
+                    <option value="">選択</option>
+                </select>
             </div>
             <hr />
             <div>
@@ -87,25 +98,33 @@
                 <label><input type="radio" ng-model="ad.priceFixed" value="fixed_amount" /> 定額</label>
                 <label><input type="radio" ng-model="ad.priceFixed" value="fixed_rate" /> 定率</label>
             </div>
-            <div>
-                <label name="grossUnitPrice">グロス単価</label>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label name="grossUnitPrice">[cv]グロス単価</label>
                 <input type="number" ng-model="ad.grossUnitPrice" name="grossUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" required>
             </div>
-            <div>
-                <label name="netUnitPrice">ネット単価</label>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label name="netUnitPrice">[cv]ネット単価</label>
                 <input type="number" ng-model="ad.netUnitPrice" name="netUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" required>
             </div>
-            <div ng-if="ad.payper == 'cv_reward'">
+            <div ng-if="ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'">
+                <label name="clickGrossUnitPrice">[click]グロス単価</label>
+                <input type="number" ng-model="ad.clickGrossUnitPrice" name="clickGrossUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" >
+            </div>
+            <div ng-if="ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'">
+                <label name="clickNetUnitPrice">[click]ネット単価</label>
+                <input type="number" ng-model="ad.clickNetUnitPrice" name="clickNetUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1">
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
                 <label for="isCvpointFree">成果地点無料・有料</label>
                 <label><input type="radio" ng-model="ad.isCvpointFree" ng-value="1" /> 無料</label>
                 <label><input type="radio" ng-model="ad.isCvpointFree" ng-value="0" /> 有料</label>
             </div>
-            <div ng-if="ad.payper == 'cv_reward'">
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
                 <label for="isCvAutoApproval">成果承認</label>
                 <label><input type="radio" ng-model="ad.isCvAutoApproval" ng-value="1" /> 自動承認</label>
                 <label><input type="radio" ng-model="ad.isCvAutoApproval" ng-value="0" /> 手動承認</label>
             </div>
-            <div ng-if="ad.payper == 'cv_reward'">
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
                 <label for="cvApproveDays">成果承認期間日数</label>
                 <input type="number" ng-model="ad.cvApproveDays" name="cvApproveDays" min="0" max="9999" pattern="^[0-9]+$"/ step="1" />
             </div>
@@ -114,11 +133,11 @@
             
             <div>
                 <label>サイトカテゴリー: </label>
-                <label><input type="checkbox" ng-click="toggleMediaCategoryAll()" ng-checked="mediaCategory.length == ad.mediaCategory.length" />All</label>
-                <label ng-repeat="item in mediaCategory">
+                <label><input type="checkbox" ng-click="toggleMediaCategoryAll()" ng-checked="mediaCategories.length == ad.mediaCategory.length" />All</label>
+                <label ng-repeat="item in mediaCategories">
                     <input
                         type="checkbox"
-                        name="os[]"
+                        name="mediaCategory[]"
                         value="{{item.id}}"
                         ng-checked="ad.mediaCategory.indexOf(item.id) > -1"
                         ng-click="toggleMediaCategorySelection(item)"

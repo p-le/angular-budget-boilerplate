@@ -3,78 +3,53 @@
   angular.module('angularPro')
     .controller('DemoCtrl', DemoCtrl);
   
-  function DemoCtrl($scope, $filter, Ad) {
+  function DemoCtrl($scope, $resource, $filter, Ad, AdCategoryFactory, AdvertiserFactory, MediaCategoryFactory, CampaignFactory, OsFactory) {
     $scope.ad = Ad;
-    $scope.deliveryMaxTypes = [ 'imp', 'click', 'cv' ];
-    $scope.advertisers = [
-      {
-        id: 1,
-        name: "Le Quang Phu"
-      },
-      {
-        id: 2,
-        name: "Phu Quang Le"
-      }
-    ];
-    $scope.adCategories = [
-      {
-        id: 1,
-        name: 'Adult'
-      },
-      {
-        id: 2,
-        name: 'Blog'
-      }
-    ];
+    $scope.campaigns = [];
+    $scope.apps = [];
 
-    $scope.os = [ 
-      { id: 1, name: 'Android' },  
-      { id: 2, name: 'iOS' },  
-      { id: 3, name: 'PC' },  
-    ];
-    $scope.mediaCategory = [
-      { id: 1, name: 'ディマージシェア' },
-      { id: 2, name: 'ブログ' },
-      { id: 3, name: 'ショッピング' },
-      { id: 4, name: '電子書籍' },
-      { id: 5, name: 'デコメ/きせかえ' },
-      { id: 6, name: 'ギャンブル' },
-      { id: 7, name: '着メロ、着うた' },
-    ];
-    $scope.campaigns = [
-      {
-        id: 1,
-        name: 'campaign 1',
-        advertiserId: 1,
-      },
-      {
-        id: 2,
-        name: 'campaign 2',
-        advertiserId: 1,
-      },
-      {
-        id: 3,
-        name: 'campaign 3',
-        advertiserId: 2,
-      }
-    ];
+    AdCategoryFactory.get({}, function(res) {
+      $scope.adCategories = angular.fromJson(res.data);
+    });
+
+    MediaCategoryFactory.get({}, function(res) {
+      $scope.mediaCategories = angular.fromJson(res.data);
+    });
+
+    AdvertiserFactory.get({}, function(res) {
+      $scope.advertisers = angular.fromJson(res.data);
+    });
+    
+    OsFactory.get({}, function(res) {
+      $scope.os = angular.fromJson(res.data);
+    });
+
+    $scope.deliveryMaxTypes = [ 'imp', 'click', 'cv' ];
+    
     $scope.payper = [
       'click_reward',
       'cv_reward',
       'click+cv_reward'
     ];
+
     $scope.creativeTypes = [
         'text',
         'picture',
         'js'
     ];
+
     $scope.clickTimeUnits = [
       'minute',
       'day'
     ];
+
     $scope.$watch('selectedAdvertiser', function(advertiser) {
       if (advertiser) {
         $scope.ad.advertiserId = advertiser.id;
+
+        CampaignFactory.get({}, function(res) {
+          $scope.campaigns = angular.fromJson(res.data);
+        });
       }
     });
 
@@ -106,6 +81,7 @@
         $scope.ad.os.push(os.id);
       }
     };
+
     $scope.toggleOsAll = function() {
       var osIds = []
       angular.forEach($scope.os, function(item) {
@@ -116,27 +92,27 @@
       } else {
         $scope.ad.os = [];
       }
-    }
+    };
 
     $scope.toggleMediaCategorySelection = function(mediaCategory) {
       var idx = $scope.ad.mediaCategory.indexOf(mediaCategory.id);
       if (idx > -1) {
         $scope.ad.mediaCategory.splice(idx, 1);
       } else {
-        $scope.ad.mediaCategory.push(os.id);
+        $scope.ad.mediaCategory.push(mediaCategory.id);
       }
     };
 
     $scope.toggleMediaCategoryAll = function() {
       var mediaCategoryIds = []
-      angular.forEach($scope.mediaCategory, function(item) {
+      angular.forEach($scope.mediaCategories, function(item) {
         mediaCategoryIds.push(item.id);
       });
-      if ($scope.ad.mediaCategory.length !== $scope.mediaCategory.length) {
+      if ($scope.ad.mediaCategory.length !== $scope.mediaCategories.length) {
         $scope.ad.mediaCategory = mediaCategoryIds;
       } else {
         $scope.ad.mediaCategory = [];
       }
-    }
+    };
   }
 })();

@@ -117,7 +117,7 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    id=\"campaignId\"\r" +
     "\n" +
-    "                    ng-options=\"campaign.name for campaign in campaigns | filter: { advertiserId: selectedAdvertiser.id } track by campaign.id \"\r" +
+    "                    ng-options=\"campaign.name for campaign in campaigns | filter: { advertiser_id: selectedAdvertiser.id } track by campaign.id \"\r" +
     "\n" +
     "                >\r" +
     "\n" +
@@ -169,7 +169,7 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <label>OS: </label>\r" +
     "\n" +
-    "                <label><input type=\"checkbox\" ng-click=\"toggleOsAll()\" ng-checked=\"os.length == ad.os.length\" />All</label>\r" +
+    "                <label><input type=\"checkbox\" ng-click=\"toggleOsAll()\" ng-checked=\"os.length == ad.os.length\" />全選択</label>\r" +
     "\n" +
     "                <label ng-repeat=\"item in os\">\r" +
     "\n" +
@@ -196,6 +196,28 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "                <label for\"optionApp\">アプリ広告</label>\r" +
     "\n" +
     "                <input type=\"checkbox\" ng-model=\"ad.optionApp\" name=\"optionApp\" id=\"optionApp\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-if=\"ad.optionApp == true\">\r" +
+    "\n" +
+    "                <label for=\"cvAppId\">アプリ</label>\r" +
+    "\n" +
+    "                <select\r" +
+    "\n" +
+    "                    ng-model=\"ad.cvAppId\"\r" +
+    "\n" +
+    "                    name=\"cvAppId\"\r" +
+    "\n" +
+    "                    id=\"cvAppId\"\r" +
+    "\n" +
+    "                    ng-options=\"app.name for app in apps track by app.id\"\r" +
+    "\n" +
+    "                >\r" +
+    "\n" +
+    "                    <option value=\"\">選択</option>\r" +
+    "\n" +
+    "                </select>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -237,23 +259,39 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div>\r" +
+    "            <div ng-if=\"ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'\">\r" +
     "\n" +
-    "                <label name=\"grossUnitPrice\">グロス単価</label>\r" +
+    "                <label name=\"grossUnitPrice\">[cv]グロス単価</label>\r" +
     "\n" +
     "                <input type=\"number\" ng-model=\"ad.grossUnitPrice\" name=\"grossUnitPrice\" min=\"0\" max=\"99999999\" pattern=\"^[0-9]+$\"/ step=\"1\" required>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div>\r" +
+    "            <div ng-if=\"ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'\">\r" +
     "\n" +
-    "                <label name=\"netUnitPrice\">ネット単価</label>\r" +
+    "                <label name=\"netUnitPrice\">[cv]ネット単価</label>\r" +
     "\n" +
     "                <input type=\"number\" ng-model=\"ad.netUnitPrice\" name=\"netUnitPrice\" min=\"0\" max=\"99999999\" pattern=\"^[0-9]+$\"/ step=\"1\" required>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div ng-if=\"ad.payper == 'cv_reward'\">\r" +
+    "            <div ng-if=\"ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'\">\r" +
+    "\n" +
+    "                <label name=\"clickGrossUnitPrice\">[click]グロス単価</label>\r" +
+    "\n" +
+    "                <input type=\"number\" ng-model=\"ad.clickGrossUnitPrice\" name=\"clickGrossUnitPrice\" min=\"0\" max=\"99999999\" pattern=\"^[0-9]+$\"/ step=\"1\" >\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-if=\"ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'\">\r" +
+    "\n" +
+    "                <label name=\"clickNetUnitPrice\">[click]ネット単価</label>\r" +
+    "\n" +
+    "                <input type=\"number\" ng-model=\"ad.clickNetUnitPrice\" name=\"clickNetUnitPrice\" min=\"0\" max=\"99999999\" pattern=\"^[0-9]+$\"/ step=\"1\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-if=\"ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'\">\r" +
     "\n" +
     "                <label for=\"isCvpointFree\">成果地点無料・有料</label>\r" +
     "\n" +
@@ -263,7 +301,7 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div ng-if=\"ad.payper == 'cv_reward'\">\r" +
+    "            <div ng-if=\"ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'\">\r" +
     "\n" +
     "                <label for=\"isCvAutoApproval\">成果承認</label>\r" +
     "\n" +
@@ -273,7 +311,7 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div ng-if=\"ad.payper == 'cv_reward'\">\r" +
+    "            <div ng-if=\"ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'\">\r" +
     "\n" +
     "                <label for=\"cvApproveDays\">成果承認期間日数</label>\r" +
     "\n" +
@@ -291,15 +329,15 @@ angular.module('angularPro').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <label>サイトカテゴリー: </label>\r" +
     "\n" +
-    "                <label><input type=\"checkbox\" ng-click=\"toggleMediaCategoryAll()\" ng-checked=\"mediaCategory.length == ad.mediaCategory.length\" />All</label>\r" +
+    "                <label><input type=\"checkbox\" ng-click=\"toggleMediaCategoryAll()\" ng-checked=\"mediaCategories.length == ad.mediaCategory.length\" />All</label>\r" +
     "\n" +
-    "                <label ng-repeat=\"item in mediaCategory\">\r" +
+    "                <label ng-repeat=\"item in mediaCategories\">\r" +
     "\n" +
     "                    <input\r" +
     "\n" +
     "                        type=\"checkbox\"\r" +
     "\n" +
-    "                        name=\"os[]\"\r" +
+    "                        name=\"mediaCategory[]\"\r" +
     "\n" +
     "                        value=\"{{item.id}}\"\r" +
     "\n" +
