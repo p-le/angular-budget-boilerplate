@@ -1,0 +1,231 @@
+<a href="#!demo/ads">戻る</a>
+<div class="wrapper">
+    <div class="form">
+        <form novalidate name="edit-form" ng-submit="submit()">
+            <div>
+                <label for"test">テスト</label>
+                <input type="checkbox" ng-model="ad.test" id="test"/>
+            </div>
+            <div>
+                <label for="name">名前: </label>
+                <input type="text" ng-model="ad.name" id="name"/>
+            </div>
+            <div>
+                <label for="advertiserId">広告主</label>
+                <select 
+                    ng-model="selectedAdvertiser" 
+                    required 
+                    name="advertiserId" 
+                    id="advertiserId"
+                    ng-options="advertiser.name for advertiser in advertisers track by advertiser.id"
+                >
+                    <option value="">選択</option>
+                </select>
+            </div>
+            <div ng-if="ad.advertiserId">
+                <label for="campaignId">キャンペーン</label>
+                <select
+                    ng-model="$parent.selectedCampaign"
+                    name="campaignId"
+                    id="campaignId"
+                    ng-options="campaign.name for campaign in campaigns | filter: { advertiser_id: selectedAdvertiser.id } track by campaign.id "
+                >
+                    <option value="">選択</option>
+                </select>
+            </div>
+            <div>
+                <label for="adCategory">広告カテゴリー</label>
+                <select
+                    ng-model="selectedAdCategory"
+                    name="adCategory"
+                    id="adCategory"
+                    ng-options="adCategory.name for adCategory in adCategories track by adCategory.id"
+                >
+                    <option value="">選択</option>
+                </select>
+            </div>
+            <div>
+                <label for="startedAt">開始日時</label>
+                <input type="datetime-local" ng-model="ad.startedAt" name="startedAt" />
+            </div>
+            <div>
+                <label for="endedAt">終了日時</label>
+                <input type="datetime-local" ng-model="ad.endedAt" name="endedAt" />
+            </div>
+            <div>
+                <label>OS: </label>
+                <label><input type="checkbox" ng-click="toggleOsAll()" ng-checked="os.length == ad.os.length" />全選択</label>
+                <label ng-repeat="item in os">
+                    <input
+                        type="checkbox"
+                        name="os[]"
+                        value="{{item.id}}"
+                        ng-checked="ad.os.indexOf(item.id) > -1"
+                        ng-click="toggleOsSelection(item)"
+                    > {{ item.name }}
+                </label>
+            </div>
+            <div>
+                <label for"optionApp">アプリ広告</label>
+                <input type="checkbox" ng-model="ad.optionApp" name="optionApp" id="optionApp"/>
+            </div>
+            <div ng-if="ad.optionApp == true">
+                <label for="cvAppId">アプリ</label>
+                <select
+                    ng-model="ad.cvAppId"
+                    name="cvAppId"
+                    id="cvAppId"
+                    ng-options="app.name for app in apps track by app.id"
+                >
+                    <option value="">選択</option>
+                </select>
+            </div>
+            <hr />
+            <div>
+                <label for="payper">報酬タイプ</label>
+                <select ng-model="ad.payper" name="payper" id="payper" ng-options="payper for payper in payper" required></select>
+            </div>
+            <div>
+                <label>キックバック通知</label>
+                <label><input type="radio" ng-model="ad.hasIncentiveAllowance" ng-value="true" /> 有</label>
+                <label><input type="radio" ng-model="ad.hasIncentiveAllowance" ng-value="false" /> 無</label>
+            </div>
+            <div>
+                <label for="cvCondition">成果発祥条件</label>
+                <input type="text" ng-model="ad.cvCondition" name="cvCondition" id="cvCondition"/>
+            </div>
+            <div>
+                <label>定額・定率（成果）</label>
+                <label><input type="radio" ng-model="ad.priceFixed" value="fixed_amount" /> 定額</label>
+                <label><input type="radio" ng-model="ad.priceFixed" value="fixed_rate" /> 定率</label>
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label name="grossUnitPrice">[cv]グロス単価</label>
+                <input type="number" ng-model="ad.grossUnitPrice" name="grossUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" required>
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label name="netUnitPrice">[cv]ネット単価</label>
+                <input type="number" ng-model="ad.netUnitPrice" name="netUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" required>
+            </div>
+            <div ng-if="ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'">
+                <label name="clickGrossUnitPrice">[click]グロス単価</label>
+                <input type="number" ng-model="ad.clickGrossUnitPrice" name="clickGrossUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1" >
+            </div>
+            <div ng-if="ad.payper === 'click_reward' || ad.payper == 'click+cv_reward'">
+                <label name="clickNetUnitPrice">[click]ネット単価</label>
+                <input type="number" ng-model="ad.clickNetUnitPrice" name="clickNetUnitPrice" min="0" max="99999999" pattern="^[0-9]+$"/ step="1">
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label for="isCvpointFree">成果地点無料・有料</label>
+                <label><input type="radio" ng-model="ad.isCvpointFree" ng-value="1" /> 無料</label>
+                <label><input type="radio" ng-model="ad.isCvpointFree" ng-value="0" /> 有料</label>
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label for="isCvAutoApproval">成果承認</label>
+                <label><input type="radio" ng-model="ad.isCvAutoApproval" ng-value="1" /> 自動承認</label>
+                <label><input type="radio" ng-model="ad.isCvAutoApproval" ng-value="0" /> 手動承認</label>
+            </div>
+            <div ng-if="ad.payper === 'cv_reward' || ad.payper == 'click+cv_reward'">
+                <label for="cvApproveDays">成果承認期間日数</label>
+                <input type="number" ng-model="ad.cvApproveDays" name="cvApproveDays" min="0" max="9999" pattern="^[0-9]+$"/ step="1" />
+            </div>
+
+            <hr />
+            
+            <div>
+                <label>サイトカテゴリー: </label>
+                <label><input type="checkbox" ng-click="toggleMediaCategoryAll()" ng-checked="mediaCategories.length == ad.mediaCategory.length" />All</label>
+                <label ng-repeat="item in mediaCategories">
+                    <input
+                        type="checkbox"
+                        name="mediaCategory[]"
+                        value="{{item.id}}"
+                        ng-checked="ad.mediaCategory.indexOf(item.id) > -1"
+                        ng-click="toggleMediaCategorySelection(item)"
+                    > {{ item.name }}
+                </label>
+            </div>
+            <div>
+                <label for="note">参考</label>
+                <textarea ng-model="ad.note" name="note" id="note"></textarea>
+            </div>
+
+            <div>
+                <label>メディア提携審査必要</label>
+                <label><input type="radio" ng-model="ad.isMediumApproveNeed" ng-value="1" /> 必要</label>
+                <label><input type="radio" ng-model="ad.isMediumApproveNeed" ng-value="0" /> 不要</label>
+            </div>
+            <div>
+                <label>原稿文言変更許可</label>
+                <label><input type="radio" ng-model="ad.isImageTextChangeable" ng-value="1" /> 可能</label>
+                <label><input type="radio" ng-model="ad.isImageTextChangeable" ng-value="0" /> 不可</label>
+            </div>
+            <hr />
+            <div>
+                <label>click有効期限</label>
+                <select ng-model="ad.clickTimeUnit" ng-options="clickTimeUnit for clickTimeUnit in clickTimeUnits">
+                    <option value="">----</option>
+                </select>
+                <input type="number" ng-if="ad.clickTimeUnit" ng-model="ad.clickExpire" name="clickExpire" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+                <small>※クリックから成果までの期間を指定します</small>
+            </div>
+            <div>
+                <label>セッションID重複チェック必要</label>
+                <label><input type="radio" ng-model="ad.isNeedCheckCvDuplicationXuid" ng-value="true" /> 必要</label>
+                <label><input type="radio" ng-model="ad.isNeedCheckCvDuplicationXuid" ng-value="false" /> 不要</label>
+            </div>
+            <div>
+                <label>成果重複click時チェック</label>
+                <label><input type="radio" ng-model="ad.cvDuplicationClickCheck" value="need" /> 必要</label>
+                <label><input type="radio" ng-model="ad.cvDuplicationClickCheck" value="needless" /> 不要</label>
+            </div>
+            <div ng-if="ad.cvDuplicationClickCheck == 'need'">
+                <label for="cvDuplicationErrorUrl">成果重複click時URL</label>
+                <input type="text" ng-model="ad.cvDuplicationErrorUrl" name="cvDuplicationErrorUrl" id="cvDuplicationErrorUrl"/>
+            </div>
+
+            <div>
+                <label>配信上限</label>
+                <select ng-model="ad.deliveryMaxType" name="deliveryMaxType" id="deliveryMaxType" ng-options="deliveryMaxType for deliveryMaxType in deliveryMaxTypes" required></select>
+                <label><input type="number" ng-model="ad.maxCount" name="maxCount" min="0" max="9999" pattern="^[0-9]+$"/ step="1"/ /> 回</label>
+            </div>
+
+            <hr />
+            <div>
+                <label name="announceCount">Announce Count</label>
+                <input type="number" ng-model="ad.announceCount" name="announceCount" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+            </div>
+            <div>
+                <label name="announceCount">Announce Days</label>
+                <input type="number" ng-model="ad.announceDays" name="announceDays" min="0" max="9999" pattern="^[0-9]+$"/ step="1" >
+            </div>
+            <div>
+                <label for="adminNote">運営者備考</label>
+                <textarea ng-model="ad.adminNote" ng-attr-placeholder="Admin Note"></textarea>
+            </div>
+            <hr />
+            <div>
+                <label for="creativeType">原稿タイプ</label>
+                <select ng-model="ad.creativeType" name="creativeType" id="creativeType" ng-options="creativeType for creativeType in creativeTypes" required>
+
+                </select>
+            </div>
+            <div>
+                <label for="maxCreativeNum">原稿数(上限)</label>
+                <select
+                    ng-model="ad.maxCreativeNum"
+                    name="maxCreativeNum"
+                    id="maxCreativeNum"
+                    ng-options="maxCreativeNum for maxCreativeNum in [] | range:20"
+                >
+
+                </select>
+            </div>
+            <button type="submit">登録</button>
+            <a href="#!demo/ads">キャンセル</a>
+        </form>
+    </div>
+    <div class="json">
+         <pre>{{ ad | json: 4 }}</pre>
+    </div>
+</div>

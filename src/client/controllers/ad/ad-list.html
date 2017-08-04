@@ -1,0 +1,56 @@
+<div>
+    <a href="#!demo/ads/create">新規登録</a>
+    <button>削除</button>
+    <button>インポート</button>
+    <button>エクスポート</button>
+</div>
+<div ng-if="!ads">
+  <p-loader size="sm"></p-loader>
+</div>
+
+<table ng-if="ads.length > 0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>広告名</th>
+            <th>広告主名</th>
+            <th>広告枠カテゴリー</th>
+            <th>[click]グロス単価</th>
+            <th>[click]ネット単価</th>
+            <th>[cv]グロス単価</th>
+            <th>[cv]ネット単価</th>
+            <th>成果発生条件</th>
+            <th>インセンティブ許可</th>
+            <th>成果承認</th>
+            <th>メディア提携審査</th>
+            <th>開始日時</th>
+            <th>終了日時</th>
+            <th>承認状態</th>
+            <th>配信状態</th>
+            <th>運営者備考</th>
+            <th>テスト</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="ad in ::ads">
+            <td>{{ ad.id }}</td>
+            <td>{{ ad.name }}</td>
+            <td>{{ ad.advertiser.name }}</td>
+            <td>{{ ad.ad_category.name }}</td>
+            <td>{{ ad.click_net_unit_price }}</td>
+            <td>{{ ad.click_gross_unit_price }}</td>
+            <td>{{ ad.net_unit_price }}</td>
+            <td>{{ ad.gross_unit_price }}</td>
+            <td>{{ ad.cv_condition }}</td>
+            <td>{{ ad.has_incentive_allowance }}</td>
+            <td>{{ ad.is_cv_auto_approval }}</td>
+            <td>{{ ad.is_medium_approve_need }}</td>
+            <td>{{ ad.started_at }}</td>
+            <td>{{ ad.ended_at }}</td>
+            <td>{{ ad.approval_status }}</td>
+            <td>{{ ad.deliver_status }}</td>
+            <td>{{ ad.admin_note }}</td>
+            <td>{{ ad.is_testing }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -59,7 +59,7 @@ const watch = {
     tasks: [ 'build:dev' ]
   },
   html: {
-    files: 'src/client/templates/*.html',
+    files: 'src/client/**/*.html',
     tasks: [ 'build:dev' ]
   },
   server: {

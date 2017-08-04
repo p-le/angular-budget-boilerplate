@@ -3,8 +3,8 @@
   angular.module('angularPro')
     .service('CampaignFactory', CampaignFactory);
 
-  function CampaignFactory($resource) {
-    var url = "http://172.16.115.96:8000/api/campaign";
+  function CampaignFactory($resource, AdmageConfig) {
+    var url = AdmageConfig.baseUrl + "/campaign";
     return $resource(url);
   }
   
