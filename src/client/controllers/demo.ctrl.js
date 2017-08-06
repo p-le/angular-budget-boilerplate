@@ -6,24 +6,8 @@
   function DemoCtrl(
       $scope,
       $resource, 
-      $filter, 
-      Ad, 
-      AdCategoryFactory, 
-      AdvertiserFactory, 
-      MediaCategoryFactory, 
-      CampaignFactory,
-      OsFactory,
-      AdFactory
+      $filter
     ) {
-    console.log($scope);
-    $scope.ad = Ad;
-    $scope.campaigns = [];
-    $scope.apps = [];
 
-    AdFactory.get({}, function(res) {
-      $scope.ads = res.data;
-    });
-
-    
   }
 })();

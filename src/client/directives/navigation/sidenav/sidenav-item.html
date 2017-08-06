@@ -1,0 +1,8 @@
+<div class="sidenav-item" ng-class="status">
+    <header class="sidenav-item-header">
+        <a>{{ ::title }} <i class="material-icons">{{ icon }}</i></a>
+    </header>
+    <ul class="sidenav-item-menu" ng-if="isOpen">
+        <li ng-repeat="m in ::menu"><a ng-href="{{m.url}}">{{ m.title }}</a></li>
+    </ul>
+</div>
