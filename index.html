@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularPro">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Angular Pro</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+  <body ng-controller="MainCtrl">
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    <p-topnav></p-topnav>
+    <p-sidenav align="left">
+      <p-sidenav-item 
+        ng-repeat="item in ::sideMenus" 
+        title="item.title" 
+        menu="item.menu">
+      </p-sidenav-item>
+    </p-sidenav>
+    <div class="content" ng-view></div>
+    <script src="vendor.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
